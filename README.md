@@ -1,4 +1,4 @@
-# Website chat realtie không cần server
+# Website chat realtime không cần server
 
 ## Xây dựng một website chat thời gian thực mà không sử dụng socket
 
