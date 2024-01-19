@@ -46,9 +46,9 @@ function sendGetRequest(url, callback) {
 }
 
 function chat(type, content) {
-  let message = {
-    image: 'https://github.com/dangtranhuu/images/blob/main/cat/08-15-27-06-cat_ready.gif?raw=true',
-    content: content
+  if (content.trim() === '') {
+    alert("Bạn SẼ bị ỉa chảY SUỐT ĐỜI");
+    return;
   }
   if (type === 'anyone') {
     // Gọi hàm sendPostRequest với thông tin cần thiết
