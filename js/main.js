@@ -1,5 +1,5 @@
 const url = 'https://chat-app-1935c-default-rtdb.asia-southeast1.firebasedatabase.app/chat';
-const imageAny = '../images/08-15-27-06-cat_ready.gif';
+const imageAny = './images/08-15-27-06-cat_ready.gif';
 let messages = localStorage.getItem('messages');
 
 // Hàm gửi yêu cầu POST đến một URL
@@ -133,6 +133,7 @@ function thread() {
       const compare = areObjectsEqual(result, JSON.parse(localStorage.getItem('messages')));
       console.log(compare);
       if (!compare) {
+        localStorage.setItem('messages', JSON.stringify(result));
         for (var key in result) {
           if (Object.prototype.hasOwnProperty.call(result, key)) {
             var content = result[key];
