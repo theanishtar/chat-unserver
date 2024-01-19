@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Interface</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .chat-container {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .chat-wrapper {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      height: 50vh;
+    }
+
+    .chat-display {
+      overflow-y: scroll;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 10px;
+    }
+
+    .message {
+      display: flex;
+      margin-bottom: 10px;
+    }
+
+    .user-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .user-name {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+
+    .message-content {
+      word-wrap: break-word;
+    }
+
+    .select-container {
+      margin-right: 15px;
+    }
+
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="chat-container">
+    <div class="chat-wrapper">
+      <div class="chat-display" id="chatDisplay">
+        <!-- Mẫu tin nhắn -->
+        <div class="message">
+          <img src="user1-avatar.jpg" alt="User 1" class="user-avatar">
+          <div class="message-content">
+            <span class="user-name">User 1:</span> Tin nhắn mẫu từ User 1
+          </div>
+        </div>
+        <div class="message">
+          <img src="user2-avatar.jpg" alt="User 2" class="user-avatar">
+          <div class="message-content">
+            <span class="user-name">User 2:</span> Tin nhắn mẫu từ User 2
+          </div>
+        </div>
+      </div>
+
+      <label for="message">Nội dung chat:</label>
+      <textarea id="message" name="message" rows="4"></textarea>
+
+      <button type="button" onclick="sendMessage()">Gửi</button>
+    </div>
+
+    <div class="select-container">
+      <label for="channel">Chọn kênh chat:</label>
+      <select id="channel" name="channel">
+        <option value="channel1">Kênh 1</option>
+        <option value="channel2">Kênh 2</option>
+        <option value="channel3">Kênh 3</option>
+      </select>
+    </div>
+  </div>
+
+  <script>
+    function sendMessage() {
+      let content = document.getElementById('message');
+
+
+    }
+  </script>
+</body>
+
+</html>
