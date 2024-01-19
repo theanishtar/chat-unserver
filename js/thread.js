@@ -1,3 +1,5 @@
+// https://console.firebase.google.com/project/chat-app-1935c/database/chat-app-1935c-default-rtdb/data/~2Fchat
+
 function myFunction() {
   console.log("Đây là hàm chạy sau mỗi 3 giây!");
   // Thêm các công việc bạn muốn thực hiện sau mỗi 3 giây ở đây
