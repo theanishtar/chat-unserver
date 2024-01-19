@@ -53,8 +53,6 @@ function chat(type, content) {
   if (type === 'anyone') {
     // Gọi hàm sendPostRequest với thông tin cần thiết
     sendPostRequest(url + "/anyone.json", content, function (response) {
-      // Xử lý kết quả trả về từ API ở đây
-      alert("joined: " + response)
     });
   }
 }
@@ -134,12 +132,15 @@ function thread() {
       console.log(compare);
       if (!compare) {
         localStorage.setItem('messages', JSON.stringify(result));
-        for (var key in result) {
-          if (Object.prototype.hasOwnProperty.call(result, key)) {
-            var content = result[key];
-            genMessage('Unknow', imageAny, content);
-          }
-        }
+        // Lấy mảng các khóa
+        const keys = Object.keys(result);
+
+        // Lấy phần tử cuối cùng
+        const lastKey = keys[keys.length - 1];
+
+        // Lấy giá trị tương ứng với phần tử cuối cùng
+        const content = result[lastKey];
+        genMessage('Unknow', imageAny, content);
       }
     });
   }

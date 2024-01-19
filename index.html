@@ -49,20 +49,20 @@
       var channel = document.getElementById('channel').value;
       var message = document.getElementById('message').value;
       chat('anyone', message);
-      var chatDisplay = document.getElementById('chatDisplay');
-      var userAvatar = './images/08-15-27-06-cat_ready.gif';  // Đường dẫn đến hình ảnh người gửi
-      var userName = 'Unknow';  // Tên người gửi
+      // var chatDisplay = document.getElementById('chatDisplay');
+      // var userAvatar = './images/08-15-27-06-cat_ready.gif';  // Đường dẫn đến hình ảnh người gửi
+      // var userName = 'Unknow';  // Tên người gửi
 
-      // Hiển thị tin nhắn trong khung chat
-      chatDisplay.innerHTML += `
-        <div class="message">
-          <img src="${userAvatar}" alt="${userName}" class="user-avatar">
-          <div>
-            <span class="user-name">${userName}</span> 
-              <div class="content">${message}</div>
-          </div>
-        </div>
-      `;
+      // // Hiển thị tin nhắn trong khung chat
+      // chatDisplay.innerHTML += `
+      //   <div class="message">
+      //     <img src="${userAvatar}" alt="${userName}" class="user-avatar">
+      //     <div>
+      //       <span class="user-name">${userName}</span> 
+      //         <div class="content">${message}</div>
+      //     </div>
+      //   </div>
+      // `;
 
       // Xóa nội dung tin nhắn từ ô input
       document.getElementById('message').value = '';
