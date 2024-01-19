@@ -1,5 +1,6 @@
 const url = 'https://chat-app-1935c-default-rtdb.asia-southeast1.firebasedatabase.app/chat';
-
+const imageAny = '../images/08-15-27-06-cat_ready.gif';
+let messages = localStorage.getItem('messages');
 
 // Hàm gửi yêu cầu POST đến một URL
 function sendPostRequest(url, data, callback) {
@@ -59,15 +60,16 @@ function chat(type, content) {
 }
 
 function fillAny() {
-  const image = 'https://github.com/dangtranhuu/images/blob/main/cat/08-15-27-06-cat_ready.gif?raw=true';
   sendGetRequest(url + "/anyone.json", function (response) {
     var result = JSON.parse(response);
-    console.log(result)
+    console.log(result);
+    localStorage.setItem('messages', JSON.stringify(result));
+    messages = result;
     // Lặp qua các khóa trong đối tượng JSON
     for (var key in result) {
       if (Object.prototype.hasOwnProperty.call(result, key)) {
         var content = result[key];
-        genMessage('Unknow', image, content);
+        genMessage('Unknow', imageAny, content);
       }
     }
   });
@@ -111,3 +113,63 @@ function genMessage(name, image, content) {
   parent.appendChild(messageDiv);
 
 }
+
+function loadChannel() {
+  const channel = localStorage.getItem('channel');
+  if (channel === null) {
+    localStorage.setItem('channel', 'anyone')
+  }
+  if (channel === 'anyone') {
+    fillAny();
+  }
+}
+
+function thread() {
+  const channel = localStorage.getItem('channel');
+
+  if (channel === 'anyone') {
+    sendGetRequest(url + "/anyone.json", function (response) {
+      var result = JSON.parse(response);
+      const compare = areObjectsEqual(result, JSON.parse(localStorage.getItem('messages')));
+      console.log(compare);
+      if (!compare) {
+        for (var key in result) {
+          if (Object.prototype.hasOwnProperty.call(result, key)) {
+            var content = result[key];
+            genMessage('Unknow', imageAny, content);
+          }
+        }
+      }
+    });
+  }
+
+}
+
+function areObjectsEqual(obj1, obj2) {
+  const keys1 = Object.keys(obj1);
+  const keys2 = Object.keys(obj2);
+
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+
+  for (const key of keys1) {
+    const val1 = obj1[key];
+    const val2 = obj2[key];
+
+    if (typeof val1 === 'object' && typeof val2 === 'object') {
+      if (!areObjectsEqual(val1, val2)) {
+        return false;
+      }
+    } else {
+      if (val1 !== val2) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+// Thiết lập hàm chạy liên tục sau mỗi 3 giây
+const intervalId = setInterval(thread, 2000);

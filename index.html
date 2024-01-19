@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="/js/main.js"></script>
+  <link rel="stylesheet" href="./css/style.css">
+  <script src="./js/main.js"></script>
   <title>Chat Interface</title>
   <style>
 
@@ -17,9 +17,7 @@
     <div class="select-container">
       <label for="channel">Chọn kênh chat:</label>
       <select id="channel" name="channel">
-        <option value="channel1">Kênh 1</option>
-        <option value="channel2">Kênh 2</option>
-        <option value="channel3">Kênh 3</option>
+        <option value="channel1">Anyone</option>
       </select>
     </div>
 
@@ -45,22 +43,23 @@
   <script>
 
     window.onload = function () {
-      fillAny();
+      loadChannel();
     }
     function sendMessage() {
       var channel = document.getElementById('channel').value;
       var message = document.getElementById('message').value;
       chat('anyone', message);
       var chatDisplay = document.getElementById('chatDisplay');
-      var userAvatar = 'your-avatar.jpg';  // Đường dẫn đến hình ảnh người gửi
-      var userName = 'You';  // Tên người gửi
+      var userAvatar = './images/08-15-27-06-cat_ready.gif';  // Đường dẫn đến hình ảnh người gửi
+      var userName = 'Unknow';  // Tên người gửi
 
       // Hiển thị tin nhắn trong khung chat
       chatDisplay.innerHTML += `
         <div class="message">
           <img src="${userAvatar}" alt="${userName}" class="user-avatar">
           <div>
-            <span class="user-name">${userName}:</span> ${message}
+            <span class="user-name">${userName}</span> 
+              <div class="content">${message}</div>
           </div>
         </div>
       `;
