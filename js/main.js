@@ -60,9 +60,7 @@ function chat(type, content) {
 function fillAny() {
   sendGetRequest(url + "/anyone.json", function (response) {
     var result = JSON.parse(response);
-    console.log(result);
     localStorage.setItem('messages', JSON.stringify(result));
-    messages = result;
     // Lặp qua các khóa trong đối tượng JSON
     for (var key in result) {
       if (Object.prototype.hasOwnProperty.call(result, key)) {
@@ -113,10 +111,11 @@ function genMessage(name, image, content) {
 }
 
 function loadChannel() {
-  const channel = localStorage.getItem('channel');
+  let channel = localStorage.getItem('channel');
   if (channel === null) {
     localStorage.setItem('channel', 'anyone')
   }
+  channel = localStorage.getItem('channel');
   if (channel === 'anyone') {
     fillAny();
   }
@@ -128,6 +127,9 @@ function thread() {
   if (channel === 'anyone') {
     sendGetRequest(url + "/anyone.json", function (response) {
       var result = JSON.parse(response);
+      let mes = localStorage.getItem('message');
+      if (!mes)
+        localStorage.setItem('messages', JSON.stringify(result));
       const compare = areObjectsEqual(result, JSON.parse(localStorage.getItem('messages')));
       console.log(compare);
       if (!compare) {
