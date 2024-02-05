@@ -128,7 +128,7 @@ function thread() {
   if (channel === 'anyone') {
     sendGetRequest(url + "/anyone.json", function (response) {
       var result = JSON.parse(response);
-      let mes = localStorage.getItem('message');
+      let mes = localStorage.getItem('messages');
       if (!mes)
         localStorage.setItem('messages', JSON.stringify(result));
       const compare = areObjectsEqual(result, JSON.parse(localStorage.getItem('messages')));
