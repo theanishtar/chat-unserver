@@ -129,7 +129,7 @@ function thread() {
     sendGetRequest(url + "/anyone.json", function (response) {
       var result = JSON.parse(response);
       let mes = localStorage.getItem('messages');
-      console.log(`MES: ${mes}`);
+      console.log(`MES: ${JSON.parse(mes)}`);
       console.log(`RESULT: ${result}`);
       if (!mes)
         localStorage.setItem('messages', JSON.stringify(result));
