@@ -25,7 +25,7 @@ body {
 
 .chat-display {
   overflow-y: scroll;
-  border: 1px solid #ccc;
+  border: 1px solid #cccb;
   border-radius: 4px;
   margin-bottom: 15px;
   padding: 10px;
