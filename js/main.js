@@ -54,7 +54,7 @@ function chat(type, content) {
     // Gọi hàm sendPostRequest với thông tin cần thiết
     sendPostRequest(url + "/anyone.json", content, function (response) {
     });
-    genMessage('Unknow', imageAny, content);
+    thread();
   }
 }
 
