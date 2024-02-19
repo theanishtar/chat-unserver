@@ -54,7 +54,14 @@ function chat(type, content) {
     // Gọi hàm sendPostRequest với thông tin cần thiết
     sendPostRequest(url + "/anyone.json", content, function (response) {
     });
+
     thread();
+    // Lấy tham chiếu đến phần tử có khả năng cuộn
+    const scrollableDiv = document.getElementById('chatDisplay');
+
+    // Cuộn xuống cuối cùng của phần tử
+    scrollableDiv.style.transition = '9s ease'; // Thiết lập transition trong JavaScript
+    scrollableDiv.scrollTop = scrollableDiv.scrollHeight;
   }
 }
 
@@ -129,8 +136,8 @@ function thread() {
     sendGetRequest(url + "/anyone.json", function (response) {
       var result = JSON.parse(response);
       let mes = localStorage.getItem('messages');
-      console.log(`MES: ${JSON.parse(mes)}`);
-      console.log(`RESULT: ${result}`);
+      console.log(`MES: ${(mes)}`);
+      console.log(`RESULT: ${(result)}`);
       if (!mes)
         localStorage.setItem('messages', JSON.stringify(result));
       const compare = areObjectsEqual(result, JSON.parse(localStorage.getItem('messages')));

@@ -25,6 +25,8 @@ body {
 
 .chat-display {
   overflow-y: scroll;
+  transition: 9s ease;
+  /* Thêm transition để tạo hiệu ứng */
   border: 1px solid #cccb;
   border-radius: 4px;
   margin-bottom: 15px;
