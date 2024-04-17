@@ -1,12 +1,13 @@
 const url = 'https://chat-app-1935c-default-rtdb.asia-southeast1.firebasedatabase.app/chat';
 const imageAny = './images/08-15-27-06-cat_ready.gif';
-let messages = localStorage.getItem('messages');
 
-function sendPostRequest(url, data, callback) {
-  var xhr = new XMLHttpRequest();
+let messages = localStorage.getItem('messages') ? JSON.parse(localStorage.getItem('messages')) : [];
+
+const sendPostRequest = (url, data, callback) => {
+  const xhr = new XMLHttpRequest();
   xhr.open("POST", url, true);
   xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.onreadystatechange = function () {
+  xhr.onreadystatechange = () => {
     if (xhr.readyState == XMLHttpRequest.DONE) {
       callback(xhr.responseText);
     }
@@ -14,10 +15,10 @@ function sendPostRequest(url, data, callback) {
   xhr.send(JSON.stringify(data));
 }
 
-function sendGetRequest(url, callback) {
-  var xhr = new XMLHttpRequest();
+const sendGetRequest = (url, callback) => {
+  const xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
-  xhr.onreadystatechange = function () {
+  xhr.onreadystatechange = () => {
     if (xhr.readyState == XMLHttpRequest.DONE) {
       if (xhr.status == 200) {
         callback(xhr.responseText);
@@ -29,7 +30,7 @@ function sendGetRequest(url, callback) {
   xhr.send();
 }
 
-function genMessage(name, image, content) {
+const genMessage = (name, image, content) => {
   const parent = document.getElementById('chatDisplay');
   const messageDiv = document.createElement('div');
   messageDiv.classList.add(`message`);
@@ -52,111 +53,88 @@ function genMessage(name, image, content) {
   parent.appendChild(messageDiv);
 }
 
-
-// Hàm chat() với callback
-function chat(channel, content, callback) {
+const chat = (channel, content, callback) => {
   if (content.trim() === '') {
     alert("Bạn Sẽ bị ỉa chảY SUỐT ĐỜI");
     return;
   }
   if (channel === 'anyone') {
-    sendPostRequest(url + "/anyone.json", content, function (response) { });
+    sendPostRequest(`${url}/anyone.json`, content, () => { });
     genMessage('Unknow', imageAny, content);
-    const messages = JSON.parse(localStorage.getItem('messages'));
-    const mes = {
-      channel: `Unknow`,
-      image: imageAny,
-      content: content
-    }
-    messages.push(mes);
+    messages.push({ channel: 'Unknow', image: imageAny, content });
     localStorage.setItem('messages', JSON.stringify(messages));
     document.getElementById('chatDisplay').scrollTop = document.getElementById('chatDisplay').scrollHeight;
   }
-  // Code giả định là gửi tin nhắn mất 1 giây
-  setTimeout(function () {
+  setTimeout(() => {
     if (typeof callback === 'function') {
-      callback(); // Gọi callback khi xong
+      callback();
     } else {
       console.log('Callback is not a function.');
     }
   }, 1000);
 }
 
-function sendMessage() {
-  var channel = document.getElementById('channel').value;
-  var message = document.getElementById('message').value;
-
+const sendMessage = () => {
+  const channel = document.getElementById('channel').value;
+  const message = document.getElementById('message').value;
   document.getElementById('message').value = '';
-  chat('anyone', message, function () {
-    scrollToBottomChat();
-  });
+  chat('anyone', message, () => scrollToBottomChat());
 }
 
-function loadChannel() {
-  let channel = localStorage.getItem('channel') || 'anyone';
+const loadChannel = () => {
+  const channel = localStorage.getItem('channel') || 'anyone';
   if (channel === 'anyone') {
     fillAny();
   }
 }
 
-function clearMessages() {
-  var messages = document.querySelectorAll('.message'); // Lấy tất cả các phần tử có class là "message"
-  messages.forEach(function (message) {
-    message.remove(); // Xóa phần tử
+const clearMessages = () => {
+  const messages = document.querySelectorAll('.message');
+  messages.forEach((message) => {
+    message.remove();
   });
 }
 
-function fillAny() {
+const fillAny = () => {
   messages = [];
-  sendGetRequest(url + "/anyone.json", function (response) {
-    var result = JSON.parse(response);
-    for (var key in result) {
+  sendGetRequest(`${url}/anyone.json`, (response) => {
+    const result = JSON.parse(response);
+    for (const key in result) {
       if (Object.prototype.hasOwnProperty.call(result, key)) {
-        var content = result[key];
+        const content = result[key];
         genMessage('Unknow', imageAny, content);
-        const mes = {
-          channel: `Unknow`,
-          image: imageAny,
-          content: content
-        }
-        messages.push(mes);
+        messages.push({ channel: 'Unknow', image: imageAny, content });
       }
     }
     document.getElementById('chatDisplay').scrollTop = document.getElementById('chatDisplay').scrollHeight;
-    console.log(messages)
     localStorage.setItem('messages', JSON.stringify(messages));
   });
 }
 
-function scrollToBottomChat() {
-  var chatDisplay = document.getElementById('chatDisplay');
+const scrollToBottomChat = () => {
+  const chatDisplay = document.getElementById('chatDisplay');
   chatDisplay.scrollTop = chatDisplay.scrollHeight;
 }
 
-function thread() {
+const thread = () => {
   const channel = localStorage.getItem('channel');
   let messagesString = localStorage.getItem('messages');
   let messages = messagesString ? JSON.parse(messagesString) : [];
 
   if (channel === 'anyone') {
-    sendGetRequest(url + "/anyone.json", function (response) {
-      var messArr = [];
-      var result = JSON.parse(response);
-      for (var key in result) {
+    sendGetRequest(`${url}/anyone.json`, (response) => {
+      const messArr = [];
+      const result = JSON.parse(response);
+      for (const key in result) {
         if (Object.prototype.hasOwnProperty.call(result, key)) {
-          var content = result[key];
-          const mes = {
-            channel: `Unknow`,
-            image: imageAny,
-            content: content
-          }
+          const content = result[key];
+          const mes = { channel: 'Unknow', image: imageAny, content };
           messArr.push(mes);
         }
       }
-      const compare = areObjectsEqual(messArr, JSON.parse(localStorage.getItem('messages')));
+      const compare = JSON.stringify(messArr) === JSON.stringify(messages);
       if (!compare) {
-        // cập nhật lại và gen mess
-        localStorage.setItem('messages', messArr);
+        localStorage.setItem('messages', JSON.stringify(messArr));
         clearMessages();
         fillAny();
       }
@@ -164,25 +142,7 @@ function thread() {
   }
 }
 
-
-function areObjectsEqual(obj1, obj2) {
-  const keys1 = Object.keys(obj1);
-  const keys2 = Object.keys(obj2);
-  if (keys1.length !== keys2.length) return false;
-  for (const key of keys1) {
-    const val1 = obj1[key];
-    const val2 = obj2[key];
-    if (typeof val1 === 'object' && typeof val2 === 'object') {
-      if (!areObjectsEqual(val1, val2)) return false;
-    } else {
-      if (val1 !== val2) return false;
-    }
-  }
-  return true;
-}
-
-// vừa vào app
-window.onload = function () {
+window.onload = () => {
   loadChannel();
 }
 
