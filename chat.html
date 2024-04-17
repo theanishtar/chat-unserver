@@ -4,51 +4,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/style.css">
+  <script src="./js/chat.js"></script>
   <title>Chat Interface</title>
-  
+
 </head>
 
 <body>
   <div class="chat-container">
-    <div class="chat-wrapper">
-      <div class="chat-display" id="chatDisplay">
-        <!-- Mẫu tin nhắn -->
-        <div class="message">
-          <img src="user1-avatar.jpg" alt="User 1" class="user-avatar">
-          <div class="message-content">
-            <span class="user-name">User 1:</span> Tin nhắn mẫu từ User 1
-          </div>
-        </div>
-        <div class="message">
-          <img src="user2-avatar.jpg" alt="User 2" class="user-avatar">
-          <div class="message-content">
-            <span class="user-name">User 2:</span> Tin nhắn mẫu từ User 2
-          </div>
-        </div>
-      </div>
-
-      <label for="message">Nội dung chat:</label>
-      <textarea id="message" name="message" rows="4"></textarea>
-
-      <button type="button" onclick="sendMessage()">Gửi</button>
-    </div>
-
     <div class="select-container">
       <label for="channel">Chọn kênh chat:</label>
       <select id="channel" name="channel">
-        <option value="channel1">Kênh 1</option>
-        <option value="channel2">Kênh 2</option>
-        <option value="channel3">Kênh 3</option>
+        <option value="channel1">Anyone</option>
       </select>
     </div>
+
+    <div class="chat-display" id="chatDisplay">
+      <!-- Mẫu tin nhắn -->
+      <!-- <div class="message" bis_skin_checked="1"><img src="./images/08-15-27-06-cat_ready.gif" alt="Unknow"
+          class="user-avatar">
+        <div bis_skin_checked="1"><span class="user-name">Unknow</span>
+          <div class="content" bis_skin_checked="1">TEST BY DANG</div>
+        </div>
+      </div> -->
+    </div>
+
+    <label for="message">Nội dung chat:</label>
+    <textarea id="message" name="message" rows="4"></textarea>
+
+    <button type="button" id="to-chat" onclick="sendMessage()">Gửi</button>
   </div>
 
   <script>
-    function sendMessage() {
-      let content = document.getElementById('message');
 
-
-    }
   </script>
 </body>
 

@@ -35,11 +35,19 @@ function chat(type, content) {
     return;
   }
   if (type === 'anyone') {
-    sendPostRequest(url + "/anyone.json", content, function (response) {});
+    sendPostRequest(url + "/anyone.json", content, function (response) { });
     thread();
     document.getElementById('chatDisplay').scrollTop = document.getElementById('chatDisplay').scrollHeight;
   }
 }
+
+function clearMessages() {
+  var messages = document.querySelectorAll('.message'); // Lấy tất cả các phần tử có class là "message"
+  messages.forEach(function (message) {
+    message.remove(); // Xóa phần tử
+  });
+}
+
 
 function fillAny() {
   sendGetRequest(url + "/anyone.json", function (response) {

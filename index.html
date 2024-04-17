@@ -5,11 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./css/style.css">
-  <script src="./js/main.js"></script>
+  <script src="./js/chat.js"></script>
   <title>Chat Interface</title>
-  <style>
 
-  </style>
 </head>
 
 <body>
@@ -23,50 +21,22 @@
 
     <div class="chat-display" id="chatDisplay">
       <!-- Mẫu tin nhắn -->
-      <!-- <div class="message">
-        <img src="https://avatars.githubusercontent.com/u/89396036?v=4" alt="User 1" class="user-avatar">
-        <div>
-          <span class="user-name">Trần Hữu Đang</span>
-          <div class="content">Tin nhắn mẫu từ User 1</div>
+      <!-- <div class="message" bis_skin_checked="1"><img src="./images/08-15-27-06-cat_ready.gif" alt="Unknow"
+          class="user-avatar">
+        <div bis_skin_checked="1"><span class="user-name">Unknow</span>
+          <div class="content" bis_skin_checked="1">TEST BY DANG</div>
         </div>
       </div> -->
-
-
     </div>
 
     <label for="message">Nội dung chat:</label>
     <textarea id="message" name="message" rows="4"></textarea>
 
-    <button type="button" onclick="sendMessage()">Gửi</button>
+    <button type="button" id="to-chat" onclick="sendMessage()">Gửi</button>
   </div>
 
   <script>
 
-    window.onload = function () {
-      loadChannel();
-    }
-    function sendMessage() {
-      var channel = document.getElementById('channel').value;
-      var message = document.getElementById('message').value;
-      chat('anyone', message);
-      // var chatDisplay = document.getElementById('chatDisplay');
-      // var userAvatar = './images/08-15-27-06-cat_ready.gif';  // Đường dẫn đến hình ảnh người gửi
-      // var userName = 'Unknow';  // Tên người gửi
-
-      // // Hiển thị tin nhắn trong khung chat
-      // chatDisplay.innerHTML += `
-      //   <div class="message">
-      //     <img src="${userAvatar}" alt="${userName}" class="user-avatar">
-      //     <div>
-      //       <span class="user-name">${userName}</span> 
-      //         <div class="content">${message}</div>
-      //     </div>
-      //   </div>
-      // `;
-
-      // Xóa nội dung tin nhắn từ ô input
-      document.getElementById('message').value = '';
-    }
   </script>
 </body>
 
