@@ -32,7 +32,7 @@ function sendGetRequest(url, callback) {
 function genMessage(name, image, content) {
   const parent = document.getElementById('chatDisplay');
   const messageDiv = document.createElement('div');
-  messageDiv.classList.add('message');
+  messageDiv.classList.add(`message`);
   const img = document.createElement('img');
   img.src = image;
   img.alt = name;
@@ -46,6 +46,7 @@ function genMessage(name, image, content) {
   messageContentDiv.textContent = content;
   contentDiv.appendChild(userNameSpan);
   contentDiv.appendChild(messageContentDiv);
+  contentDiv.setAttribute('content', content);
   messageDiv.appendChild(img);
   messageDiv.appendChild(contentDiv);
   parent.appendChild(messageDiv);
