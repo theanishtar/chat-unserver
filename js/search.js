@@ -17,10 +17,11 @@ const getResult = (val) => {
   const messagesString = localStorage.getItem('messages');
   const messages = messagesString ? JSON.parse(messagesString) : [];
   const mesResult = [];
-  if (messages.length == 0) {
-    clearMarkTag();
+  clearMarkTag();
+
+  if (messages.length == 0)
     return;
-  }
+
   for (const m of messages) {
     if (m.content.includes(val)) {
       mesResult.push(m);
