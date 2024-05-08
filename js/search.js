@@ -19,8 +19,10 @@ const getResult = (val) => {
   const mesResult = [];
   clearMarkTag();
 
-  if (messages.length == 0)
+  if (messages.length == 0) {
+    document.getElementById('result-search').textContent = `có 0 kết quả được tìm thấy`;
     return;
+  }
 
   for (const m of messages) {
     if (m.content.includes(val)) {
@@ -29,9 +31,7 @@ const getResult = (val) => {
       element.innerHTML = m.content.replace(val, `<mark>${val}</mark>`);
     }
   }
-  if (mesResult.length > 0) {
-    document.getElementById('result-search').textContent = `có ${mesResult.length} kết quả được tìm thấy`;
-  }
+  document.getElementById('result-search').textContent = `có ${mesResult.length} kết quả được tìm thấy`;
 };
 
 const debounce = (func, delay) => {
